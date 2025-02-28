@@ -1,0 +1,35 @@
+@font-face {
+    font-family: "rubikRegular";
+    src: url("../../public/fonts/Rubik/static/Rubik-Regular.ttf");
+    font-style: normal;
+    font-weight: 400;
+  }
+  @font-face {
+    font-family: "rubikBold";
+    src: url("../../public/fonts/Rubik/static/Rubik-Bold.ttf");
+  }
+  @font-face {
+    font-family: "rubikMedium";
+    src: url("../../public/fonts/Rubik/static/Rubik-Medium.ttf");
+  }
+  @font-face {
+    font-family: "rubikLight";
+    src: url("../../public/fonts/Rubik/static/Rubik-Light.ttf");
+  }
+
+  @font-face{
+    font-family: "interRegular";
+    src: url("../../public/fonts/Inter_18pt-Regular.ttf")
+  }
+  @font-face{
+    font-family: "interMedium";
+    src: url("../../public/fonts/Inter/static/Inter_18pt-Medium.ttf")
+  }
+
+ 
+   
+   
+
+
+   
+  
