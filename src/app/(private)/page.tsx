@@ -1,6 +1,10 @@
 "use client";
 import * as motion from "motion/react-client";
 import { useEffect, useState } from "react";
+import { Topupicon } from "@/components/ui/svgs/topup";
+import { History } from "@/components/ui/svgs/history";
+import { Sendmoneyicon } from "@/components/ui/svgs/sendmoney";
+import { Recievemoneyicon } from "@/components/ui/svgs/recievemoney";
 
 export default function home() {
   const [randomPosition, setRandomPosition] = useState({ x: 0, y: 0 });
@@ -37,24 +41,37 @@ export default function home() {
             <p>usericon</p>
           </div>
         </motion.div>
-      <div className="mt-10 flex-wrap items-center justify-center">
-        <div className="flex justify-center items-center mt-4">
-          <div className="relative">
-          <p className="text-white text-lg absolute top-0 left-[-4vw]">$</p>
-            <p className="text-5xl text-white">298,87</p>
+        <div className="mt-10 flex-wrap items-center justify-center">
+          <div className="flex justify-center items-center mt-4">
+            <div className="relative">
+              <p className="text-white text-lg absolute top-0 left-[-4vw]">$</p>
+              <p className="text-5xl text-white">298,87</p>
+            </div>
           </div>
-      </div>
-
         </div>
       </div>
-          {/* termino header */}
+      {/* termino header */}
 
-
-          {/* Começo body */}
+      {/* Começo body */}
       <div className="h-[70vh] bg-white w-screen relative flex justify-center">
-          <div className="w-[90vw] h-[10vh] bg-white absolute top-[-4vh] rounded-tr-2xl rounded-tl-2xl">
-
+        <div className="w-[90vw] h-[10vh] bg-white absolute top-[-4vh] rounded-tr-2xl rounded-tl-2xl flex justify-around items-center">
+          <div className="flex flex-col items-center">
+            <Topupicon />
+            <p>Top up</p>
           </div>
+          <div className="flex flex-col items-center">
+            <Sendmoneyicon />
+            <p>Send</p>
+          </div>
+          <div className="flex flex-col items-center">
+            <Recievemoneyicon />
+            <p>Request</p>
+          </div>
+          <div className="flex flex-col items-center">
+            <History />
+            <p>History</p>
+          </div>
+        </div>
       </div>
     </div>
   );
