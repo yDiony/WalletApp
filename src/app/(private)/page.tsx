@@ -1,5 +1,15 @@
 "use client";
 import * as motion from "motion/react-client";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
 import { useEffect, useState } from "react";
 import { Topupicon } from "@/components/ui/svgs/topup";
 import { History } from "@/components/ui/svgs/history";
@@ -7,7 +17,9 @@ import { Sendmoneyicon } from "@/components/ui/svgs/sendmoney";
 import { Recievemoneyicon } from "@/components/ui/svgs/recievemoney";
 import { Moreicon } from "@/components/ui/svgs/more";
 import { Home } from "@/components/ui/svgs/navigationbar/home";
-
+import { UserIcon } from "lucide-react";
+import { Graphicstab } from "@/components/ui/svgs/navigationbar/graphicstab";
+import { Button } from "@/components/ui/button";
 export default function home() {
   const [randomPosition, setRandomPosition] = useState({ x: 0, y: 0 });
 
@@ -27,10 +39,10 @@ export default function home() {
       <div className="fixed max-w-screen h-[10vh] bottom-0 z-10 flex justify-between ">
         <div className="bg-white h-full w-screen flex justify-between place-items-center p-4">
           <div>
-            <Home/>
+            <Home />
           </div>
-          <div>
-            <Topupicon />
+          <div className="">
+            <Graphicstab />
           </div>
           <div>
             <Topupicon />
@@ -56,8 +68,8 @@ export default function home() {
             <p className="text-[#BDBDBD]">Active</p>
           </div>
 
-          <div>
-            <p>usericon</p>
+          <div className="bg-white rounded-full w-12 h-12 flex items-center justify-center">
+            <UserIcon className="" color="#5d00a8" />
           </div>
         </motion.div>
         <div className="mt-10 flex-wrap items-center justify-center">
@@ -76,8 +88,41 @@ export default function home() {
         <div className="flex justify-center w-full h-[6.5vh]">
           <div className="w-[90vw] h-[10vh] bg-white absolute top-[-4vh] rounded-tr-2xl rounded-tl-2xl flex justify-around items-center">
             <div className="flex flex-col items-center">
-              <Topupicon />
-              <p>Top up</p>
+              <div className="flex flex-col items-center">
+                <Dialog>
+                  {/* O ícone vai virar o botão de abrir */}
+                  <DialogTrigger asChild>
+                    <div className="flex flex-col items-center cursor-pointer">
+                      <Topupicon />
+                      <p>Top up</p>
+                    </div>
+                  </DialogTrigger>
+
+                  {/* Conteúdo do modal */}
+                  <DialogContent>
+                    
+                    <DialogHeader>
+                      <DialogTitle>Top Up your ballance</DialogTitle>
+                      <DialogDescription>
+                        Aqui você pode adicionar saldo na sua carteira.
+                      </DialogDescription>
+                    </DialogHeader>
+
+                    <div className="py-4">
+                      <p className="text-gray-700">
+                        Coloque aqui inputs, botões ou o que quiser.
+                      </p>
+                    </div>
+
+                    <DialogFooter>
+                      <DialogClose asChild>
+                        <Button variant="outline">Cancelar</Button>
+                      </DialogClose>
+                      <Button>Confirmar</Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+              </div>
             </div>
             <div className="flex flex-col items-center">
               <Sendmoneyicon />
