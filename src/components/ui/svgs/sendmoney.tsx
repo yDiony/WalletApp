@@ -1,22 +1,6 @@
 export const Sendmoneyicon = () => {
   return (
-  <svg width="32px" height="32px" viewBox="0 0 24 24" fill="none"
-     xmlns="http://www.w3.org/2000/svg"
-     stroke="#5d00a8" stroke-width="0.72" stroke-linecap="round" stroke-linejoin="round">
-
-  
-  <path d="M22 12C22 17.52 17.52 22 12 22C6.48 22 2 17.52 2 12C2 6.48 6.48 2 12 2" />
-
- 
-  <g opacity="0.4">
-    <path d="M9.5 13.75C9.5 14.72 10.25 15.5 11.17 15.5H13.05C13.85 15.5 14.5 14.82 14.5 13.97C14.5 13.06 14.1 12.73 13.51 12.52L10.5 11.47C9.91 11.26 9.51 10.94 9.51 10.02C9.51 9.18 10.16 8.49 10.96 8.49H12.84C13.76 8.49 14.51 9.27 14.51 10.24" />
-  </g>
-  <path d="M12 7.5V16.5" />
-
- 
-  <path d="M17 2h5v5" />
-  <path d="M22 2L16 8" />
-</svg>
+ <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#5d00a8" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" className="lucide lucide-banknote-arrow-up-icon lucide-banknote-arrow-up"><path d="M12 18H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5"/><path d="M18 12h.01"/><path d="M19 22v-6"/><path d="m22 19-3-3-3 3"/><path d="M6 12h.01"/><circle cx="12" cy="12" r="2"/></svg>
 
   );
 };

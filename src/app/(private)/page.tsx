@@ -1,4 +1,5 @@
 "use client";
+import { useState, useEffect, ReactNode } from "react";
 import * as motion from "motion/react-client";
 import {
   Dialog,
@@ -10,45 +11,80 @@ import {
   DialogFooter,
   DialogClose,
 } from "@/components/ui/dialog";
-import { useEffect, useState } from "react";
+
 import { Topupicon } from "@/components/ui/svgs/topup";
-import { History } from "@/components/ui/svgs/history";
+import { Moresquares } from "@/components/ui/svgs/moresquares";
 import { Sendmoneyicon } from "@/components/ui/svgs/sendmoney";
 import { Recievemoneyicon } from "@/components/ui/svgs/recievemoney";
-import { Moreicon } from "@/components/ui/svgs/more";
+import {
+  ArrowDown,
+  ArrowUp,
+  CreditCard,
+  Ellipsis,
+  Landmark,
+} from "lucide-react";
 import { Home } from "@/components/ui/svgs/navigationbar/home";
 import { UserIcon } from "lucide-react";
 import { Graphicstab } from "@/components/ui/svgs/navigationbar/graphicstab";
 import { Button } from "@/components/ui/button";
+
+interface Transacao {
+  id: number;
+  icon: ReactNode;
+  titulo: string;
+  data: string;
+  valor: string;
+}
+
 export default function home() {
-  const [randomPosition, setRandomPosition] = useState({ x: 0, y: 0 });
+  const [transacoes, setTransacoes] = useState<Transacao[]>([]);
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setRandomPosition({
-  //       x: Math.random() * 100,
-  //       y: Math.random() * 100,
-  //     });
-  //   }, 1000); // Atualiza a posição a cada 2 segundos
-
-  //   return () => clearInterval(interval);
-  // }, []);
+  useEffect(() => {
+    const mockData: Transacao[] = [
+      {
+        id: 1,
+        icon: <ArrowDown />,
+        titulo: "Netflix Subscription",
+        data: "Today 12:32",
+        valor: "-$39.90",
+      },
+      {
+        id: 2,
+        icon: <ArrowUp />,
+        titulo: "Top up",
+        data: "Yesterday 02:12",
+        valor: "+$120.00",
+      },
+      {
+        id: 3,
+        icon: <ArrowDown />,
+        titulo: "Mercado Livre",
+        data: "Dec 24 10:21",
+        valor: "-$250.00",
+      },
+    ];
+    setTimeout(() => setTransacoes(mockData), 1000);
+  }, []);
 
   return (
     <div className="">
       <div className="fixed max-w-screen h-[10vh] bottom-0 z-10 flex justify-between ">
-        <div className="bg-white h-full w-screen flex justify-between place-items-center p-4">
-          <div>
+        <div className="bg-white h-full w-screen flex justify-between place-items-center p-5">
+          <div className="flex flex-col items-center justify-center">
             <Home />
+            <p>Home</p>
           </div>
-          <div className="">
+          <div className="flex flex-col items-center justify-center">
             <Graphicstab />
+            <p>Stats</p>
           </div>
-          <div>
-            <Topupicon />
+          <div className="flex flex-col items-center justify-center">
+            <CreditCard className="stroke-[#5d00a8] stroke-1 w-[30px] h-[30px]" />
+            <p>Cards</p>
           </div>
-          <div>
-            <Topupicon />
+          <div className="flex flex-col items-center justify-center">
+            <Moresquares />
+            <p>More</p>
           </div>
         </div>
       </div>
@@ -88,6 +124,7 @@ export default function home() {
         <div className="flex justify-center w-full h-[6.5vh]">
           <div className="w-[90vw] h-[10vh] bg-white absolute top-[-4vh] rounded-tr-2xl rounded-tl-2xl flex justify-around items-center">
             <div className="flex flex-col items-center">
+              {/* top up account */}
               <div className="flex flex-col items-center">
                 <Dialog>
                   {/* O ícone vai virar o botão de abrir */}
@@ -100,136 +137,90 @@ export default function home() {
 
                   {/* Conteúdo do modal */}
                   <DialogContent>
-                    
                     <DialogHeader>
                       <DialogTitle>Top Up your ballance</DialogTitle>
                       <DialogDescription>
-                        Aqui você pode adicionar saldo na sua carteira.
+                        Add funds to your wallet
                       </DialogDescription>
                     </DialogHeader>
 
                     <div className="py-4">
-                      <p className="text-gray-700">
-                        Coloque aqui inputs, botões ou o que quiser.
-                      </p>
+                      <p className="text-gray-700">soon</p>
                     </div>
 
                     <DialogFooter>
                       <DialogClose asChild>
-                        <Button variant="outline">Cancelar</Button>
+                        <Button variant="destructive">Cancel</Button>
                       </DialogClose>
-                      <Button>Confirmar</Button>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
               </div>
             </div>
+            {/* Send money             */}
             <div className="flex flex-col items-center">
               <Sendmoneyicon />
               <p>Send</p>
             </div>
+            {/* Request money */}
             <div className="flex flex-col items-center">
               <Recievemoneyicon />
               <p>Request</p>
             </div>
+            {/* History */}
             <div className="flex flex-col items-center">
-              <History />
-              <p>History</p>
+              <Landmark className="stroke-[#5d00a8] stroke-1 w-[30px] h-[30px]" />
+              <p>Withdraw</p>
             </div>
           </div>
         </div>
+        {/* 
 
-        <div className="">
-          <p className="p-4 text-2xl text-">Pagamentos</p>
-          <div className="grid grid-cols-4 gap-6 px-6">
-            <div className="flex flex-col items-center">
-              <div className="w-12 h-12 bg-red-100 flex items-center justify-center rounded-xl">
-                <span className="text-red-500 text-xl">🌐</span>
-              </div>
-              <p className="mt-2 text-sm">Internet</p>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <div className="w-12 h-12 bg-yellow-100 flex items-center justify-center rounded-xl">
-                <span className="text-yellow-500 text-xl">⚡</span>
-              </div>
-              <p className="mt-2 text-sm">Electricity</p>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <div className="w-12 h-12 bg-green-100 flex items-center justify-center rounded-xl">
-                <span className="text-green-500 text-xl">🎟️</span>
-              </div>
-              <p className="mt-2 text-sm">Voucher</p>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <div className="w-12 h-12 bg-sky-100 flex items-center justify-center rounded-xl">
-                <span className="text-sky-500 text-xl">🛡️</span>
-              </div>
-              <p className="mt-2 text-sm">Assurance</p>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <div className="w-12 h-12 bg-purple-100 flex items-center justify-center rounded-xl">
-                <span className="text-purple-500 text-xl">💳</span>
-              </div>
-              <p className="mt-2 text-sm">M Card</p>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <div className="w-12 h-12 bg-pink-100 flex items-center justify-center rounded-xl">
-                <span className="text-pink-500 text-xl">📑</span>
-              </div>
-              <p className="mt-2 text-sm">Bill</p>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <div className="w-12 h-12 bg-indigo-100 flex items-center justify-center rounded-xl">
-                <span className="text-indigo-500 text-xl">🛒</span>
-              </div>
-              <p className="mt-2 text-sm">Merchant</p>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <div className="w-12 h-12 bg-gray-100 flex items-center justify-center rounded-xl">
-                <Moreicon />
-              </div>
-              <p className="mt-2 text-sm">More</p>
+          Latest Transactions
+          
+          */}
+        <div className="p-4">
+          <div className="flex justify-center items-center">
+            <div className="w-full flex justify-between">
+              <p className="text-[14px] font-bold">Latest Transactions</p>
+              <p className="text-[12px] text-gray-400">View all</p>
             </div>
           </div>
+          {transacoes.length > 0 ? (
+            transacoes.map((t) => (
+              <div
+                key={t.id}
+                className="flex justify-between items-center bg-gray-100 p-3 rounded-xl"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="bg-[#E6DDFF] p-2 rounded-sm shadow">
+                    {t.icon}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold">{t.titulo}</p>
+                    <p className="text-xs text-gray-400">{t.data}</p>
+                  </div>
+                </div>
+                <p
+                  className={`text-xs tracking-wide font-bold ${
+                    t.valor.startsWith("-") ? "text-red-500" : "text-[#289B4F]"
+                  }`}
+                >
+                  {t.valor}
+                </p>
+              </div>
+            ))
+          ) : (
+            <p className="text-gray-400 text-sm text-center mt-2">
+              Carregando transações...
+            </p>
+          )}
         </div>
-
-        <div>
-          <div className="w-full p-4">
-            {/* Cabeçalho */}
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold text-gray-900">
-                Promo & Discount
-              </h2>
-              <span className="text-purple-600 text-sm cursor-pointer">
-                See more
-              </span>
-            </div>
-
-            {/* Card de Promo */}
-            <div className="w-full h-40 rounded-3xl bg-gradient-to-r from-purple-900 to-purple-700 p-4 relative overflow-hidden">
-              <h3 className="text-white text-xl font-bold mb-2">
-                Special Offer
-                <br />
-                For Today’s Top Up
-              </h3>
-              <p className="text-purple-200 text-sm">
-                Get discount for every top up, transfer and payment
-              </p>
-
-              {/* Elementos decorativos */}
-              <div className="absolute top-0 right-0 w-8 h-8 bg-purple-500 rounded-full opacity-50"></div>
-              <div className="absolute bottom-4 left-4 w-12 h-3 bg-purple-400 rounded-full opacity-50"></div>
-            </div>
-          </div>
-        </div>
-
+        {/* 
+            
+            Promo & Discounts
+            
+            */}
         <div>
           <div className="w-full p-4">
             {/* Cabeçalho */}
