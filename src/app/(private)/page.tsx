@@ -1,28 +1,14 @@
 "use client";
-import { useState, useEffect, ReactNode } from "react";
+import { useState, useEffect, ReactNode, SetStateAction } from "react";
 import * as motion from "motion/react-client";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-  DialogClose,
-} from "@/components/ui/dialog";
+import { animate } from "motion"
+import {Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose} from "@/components/ui/dialog";
 
 import { Topupicon } from "@/components/ui/svgs/topup";
 import { Moresquares } from "@/components/ui/svgs/moresquares";
 import { Sendmoneyicon } from "@/components/ui/svgs/sendmoney";
 import { Recievemoneyicon } from "@/components/ui/svgs/recievemoney";
-import {
-  ArrowDown,
-  ArrowUp,
-  CreditCard,
-  Ellipsis,
-  Landmark,
-} from "lucide-react";
+import {ArrowDown, ArrowUp,Landmark,} from "lucide-react";
 import { Home } from "@/components/ui/svgs/navigationbar/home";
 import { UserIcon } from "lucide-react";
 import { Graphicstab } from "@/components/ui/svgs/navigationbar/graphicstab";
@@ -38,6 +24,18 @@ interface Transacao {
 
 export default function home() {
   const [transacoes, setTransacoes] = useState<Transacao[]>([]);
+   const [valorFinal] = useState(298.87);
+  const [valorAtual, setValorAtual] = useState(0);
+
+  useEffect(() => {
+    const controls = animate(0, valorFinal, {
+      duration: 1.2,
+      ease: "easeOut",
+      onUpdate: (latest: SetStateAction<number>) => setValorAtual(latest),
+    });
+
+    return () => controls.stop();
+  }, [valorFinal]);
 
   useEffect(() => {
     const mockData: Transacao[] = [
@@ -68,26 +66,6 @@ export default function home() {
 
   return (
     <div className="">
-      <div className="fixed max-w-screen h-[10vh] bottom-0 z-10 flex justify-between ">
-        <div className="bg-white h-full w-screen flex justify-between place-items-center p-5">
-          <div className="flex flex-col items-center justify-center">
-            <Home />
-            <p>Home</p>
-          </div>
-          <div className="flex flex-col items-center justify-center">
-            <Graphicstab />
-            <p>Stats</p>
-          </div>
-          <div className="flex flex-col items-center justify-center">
-            <CreditCard className="stroke-[#5d00a8] stroke-1 w-[30px] h-[30px]" />
-            <p>Cards</p>
-          </div>
-          <div className="flex flex-col items-center justify-center">
-            <Moresquares />
-            <p>More</p>
-          </div>
-        </div>
-      </div>
       {/* termino footer */}
       <div className="p-8 h-[30vh] bg-[linear-gradient(39deg,rgba(44,0,97,1)_0%,rgba(79,0,176,1)_100%)]">
         <motion.div
@@ -111,9 +89,16 @@ export default function home() {
         <div className="mt-10 flex-wrap items-center justify-center">
           <div className="flex justify-center items-center mt-4">
             <div className="relative">
-              <p className="text-white text-lg absolute top-0 left-[-4vw]">$</p>
-              <p className="text-5xl text-white">298,87</p>
-            </div>
+          <p className="text-white text-lg absolute top-0 left-[-4vw]">$</p>
+          <motion.p
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="text-5xl text-white"
+          >
+            {valorAtual.toFixed(2)}
+          </motion.p>
+        </div>
           </div>
         </div>
       </div>
@@ -167,7 +152,7 @@ export default function home() {
               <Recievemoneyicon />
               <p>Request</p>
             </div>
-            {/* History */}
+            {/* Withdraw */}
             <div className="flex flex-col items-center">
               <Landmark className="stroke-[#5d00a8] stroke-1 w-[30px] h-[30px]" />
               <p>Withdraw</p>
