@@ -1,17 +1,23 @@
 "use client";
 import { useState, useEffect, ReactNode, SetStateAction } from "react";
 import * as motion from "motion/react-client";
-import { animate } from "motion"
-import {Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose} from "@/components/ui/dialog";
+import { animate } from "motion";
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+  DialogClose,
+} from "@/components/ui/dialog";
 
 import { Topupicon } from "@/components/ui/svgs/topup";
-import { Moresquares } from "@/components/ui/svgs/moresquares";
 import { Sendmoneyicon } from "@/components/ui/svgs/sendmoney";
 import { Recievemoneyicon } from "@/components/ui/svgs/recievemoney";
-import {ArrowDown, ArrowUp,Landmark,} from "lucide-react";
-import { Home } from "@/components/ui/svgs/navigationbar/home";
+import { ArrowDown, ArrowUp, Landmark } from "lucide-react";
 import { UserIcon } from "lucide-react";
-import { Graphicstab } from "@/components/ui/svgs/navigationbar/graphicstab";
 import { Button } from "@/components/ui/button";
 
 interface Transacao {
@@ -24,8 +30,39 @@ interface Transacao {
 
 export default function home() {
   const [transacoes, setTransacoes] = useState<Transacao[]>([]);
-   const [valorFinal] = useState(298.87);
+  const [valorFinal] = useState(298.87);
   const [valorAtual, setValorAtual] = useState(0);
+
+  // APENAS PARA TESTE DO TOPUP
+  const [value, setValue] = useState("0");
+
+  const suggestions = [10, 20, 50, 100];
+
+  const formatCurrency = (val: string) => {
+    const number = parseInt(val || "0");
+    return (number / 100).toLocaleString("pt-BR", {
+      minimumFractionDigits: 2,
+    });
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let input = e.target.value.replace(/\D/g, ""); // remove tudo que não for número
+    setValue(input);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Backspace") {
+      setValue((prev) => prev.slice(0, -1));
+      e.preventDefault();
+    }
+  };
+
+  const handleSelect = (amount: number) => {
+  const cents = amount * 100; // converte pra centavos
+  setValue(cents.toString());
+};
+
+  //TERMINO/////////////////////////////////////////////////////
 
   useEffect(() => {
     const controls = animate(0, valorFinal, {
@@ -89,16 +126,16 @@ export default function home() {
         <div className="mt-10 flex-wrap items-center justify-center">
           <div className="flex justify-center items-center mt-4">
             <div className="relative">
-          <p className="text-white text-lg absolute top-0 left-[-4vw]">$</p>
-          <motion.p
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            className="text-5xl text-white"
-          >
-            {valorAtual.toFixed(2)}
-          </motion.p>
-        </div>
+              <p className="text-white text-lg absolute top-0 left-[-4vw]">$</p>
+              <motion.p
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="text-5xl text-white"
+              >
+                {valorAtual.toFixed(2)}
+              </motion.p>
+            </div>
           </div>
         </div>
       </div>
@@ -129,8 +166,32 @@ export default function home() {
                       </DialogDescription>
                     </DialogHeader>
 
-                    <div className="py-4">
-                      <p className="text-gray-700">soon</p>
+                    <div className="py-4 flex items-center text-4xl font-semibold text-gray-800">
+                      <span className="mr-1">$</span>
+                      <input
+                        type="text"
+                        value={formatCurrency(value)}
+                        onChange={handleChange}
+                        onKeyDown={handleKeyDown}
+                        className="outline-none bg-transparent w-full"
+                      />
+                    </div>
+
+                    <div className="flex gap-2 flex-wrap justify-between">
+                      {suggestions.map((item) => (
+                        <button
+                          key={item}
+                          onClick={() => handleSelect(item)}
+                          className={`px-5 py-2 rounded-lg text-sm font-medium transition border-gray-300 border-solid border-[1px]
+              ${
+                value === item.toString()
+                  ? "bg-lime-400 text-black"
+                  : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+              }`}
+                        >
+                          ${item}
+                        </button>
+                      ))}
                     </div>
 
                     <DialogFooter>
@@ -140,8 +201,10 @@ export default function home() {
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
+                {/* fim modal */}
               </div>
             </div>
+
             {/* Send money             */}
             <div className="flex flex-col items-center">
               <Sendmoneyicon />
