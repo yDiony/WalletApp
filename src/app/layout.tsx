@@ -5,6 +5,9 @@ import { Home } from "@/components/ui/svgs/navigationbar/home";
 import { Graphicstab } from "@/components/ui/svgs/navigationbar/graphicstab";
 import { CreditCard } from "lucide-react";
 import { Moresquares } from "@/components/ui/svgs/moresquares";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,30 +31,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-        <div className="fixed max-w-screen h-[10vh] bottom-0 z-10 flex justify-between ">
-        <div className="bg-white h-full w-screen flex justify-between place-items-center p-5">
-          <a href="../" className="flex flex-col items-center justify-center">
-            <Home />
-            <p>Home</p>
-          </a>
-          <a href="history" className="flex flex-col items-center justify-center">
-            <Graphicstab />
-            <p>Stats</p>
-          </a>
-          <div className="flex flex-col items-center justify-center">
-            <CreditCard className="stroke-[#5d00a8] stroke-1 w-[30px] h-[30px]" />
-            <p>Cards</p>
-          </div>
-          <div className="flex flex-col items-center justify-center">
-            <Moresquares />
-            <p>More</p>
-          </div>
-        </div>
-      </div>
       </body>
     </html>
   );

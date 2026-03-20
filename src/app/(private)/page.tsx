@@ -1,306 +1,274 @@
 "use client";
-import { useState, useEffect, ReactNode, SetStateAction } from "react";
-import * as motion from "motion/react-client";
-import { animate } from "motion";
-import {
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter,
-  DialogClose,
-} from "@/components/ui/dialog";
 
-import { Topupicon } from "@/components/ui/svgs/topup";
-import { Sendmoneyicon } from "@/components/ui/svgs/sendmoney";
-import { Recievemoneyicon } from "@/components/ui/svgs/recievemoney";
-import { ArrowDown, ArrowUp, Landmark } from "lucide-react";
-import { UserIcon } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { motion } from "framer-motion";
 
-interface Transacao {
-  id: number;
-  icon: ReactNode;
-  titulo: string;
-  data: string;
-  valor: string;
-}
+const Icon = ({
+  name,
+  className = "",
+}: {
+  name: string;
+  className?: string;
+}) => <span className={`material-symbols-outlined ${className}`}>{name}</span>;
 
-export default function home() {
-  const [transacoes, setTransacoes] = useState<Transacao[]>([]);
-  const [valorFinal] = useState(298.87);
-  const [valorAtual, setValorAtual] = useState(0);
-
-  // APENAS PARA TESTE DO TOPUP
-  const [value, setValue] = useState("0");
-
-  const suggestions = [10, 20, 50, 100];
-
-  const formatCurrency = (val: string) => {
-    const number = parseInt(val || "0");
-    return (number / 100).toLocaleString("pt-BR", {
-      minimumFractionDigits: 2,
-    });
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let input = e.target.value.replace(/\D/g, ""); // remove tudo que não for número
-    setValue(input);
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Backspace") {
-      setValue((prev) => prev.slice(0, -1));
-      e.preventDefault();
-    }
-  };
-
-  const handleSelect = (amount: number) => {
-  const cents = amount * 100; // converte pra centavos
-  setValue(cents.toString());
-};
-
-  //TERMINO/////////////////////////////////////////////////////
-
-  useEffect(() => {
-    const controls = animate(0, valorFinal, {
-      duration: 1.2,
-      ease: "easeOut",
-      onUpdate: (latest: SetStateAction<number>) => setValorAtual(latest),
-    });
-
-    return () => controls.stop();
-  }, [valorFinal]);
-
-  useEffect(() => {
-    const mockData: Transacao[] = [
-      {
-        id: 1,
-        icon: <ArrowDown />,
-        titulo: "Netflix Subscription",
-        data: "Today 12:32",
-        valor: "-$39.90",
-      },
-      {
-        id: 2,
-        icon: <ArrowUp />,
-        titulo: "Top up",
-        data: "Yesterday 02:12",
-        valor: "+$120.00",
-      },
-      {
-        id: 3,
-        icon: <ArrowDown />,
-        titulo: "Mercado Livre",
-        data: "Dec 24 10:21",
-        valor: "-$250.00",
-      },
-    ];
-    setTimeout(() => setTransacoes(mockData), 1000);
-  }, []);
-
+export default function HomePage() {
   return (
-    <div className="">
-      {/* termino footer */}
-      <div className="p-8 h-[30vh] bg-[linear-gradient(39deg,rgba(44,0,97,1)_0%,rgba(79,0,176,1)_100%)]">
-        <motion.div
-          className="w-full flex justify-between"
-          initial={{ opacity: 0, x: 50, y: -20 }}
-          animate={{ opacity: 1, x: 0, y: 0 }}
-          transition={{
-            duration: 1.4,
-            ease: "easeOut",
-          }}
-        >
-          <div>
-            <p className="font-[rubikMedium] text-white text-[24px]">Wallet</p>
-            <p className="text-[#BDBDBD]">Active</p>
+    <div className="min-h-screen bg-[#101419] text-[#e0e2eb]">
+      {/* HEADER */}
+      <header className="fixed top-0 w-full z-50 backdrop-blur-md bg-[#101419]/80 border-b border-[#474553]/20">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full overflow-hidden border border-[#474553]/30">
+              <Image
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBl-Dq648KwNKRSRVLclvqcpKW54EqK3pM-y0KIBXLXVpeJnbO8SlqyaTuPD1ZIcKEdzfxoAAg2HO-8zoBNthMb6hkJvfGKXjLVOEqSpCIEQRKo6hG7uyjtP4rXprAp2Y3-irnVvirOwS9IofYzLuzPFoclNR3iqcMrhCK5XWAq6FoxoQ8cMX60rIyEv3CSoqp4IfANanSSdWJ9GyDqHkWTEiWzGwJK9k1xnuiUI0vth7dCovvFRZFCCqsDnyz3ZxytDFQC7C7nvyH9"
+                alt="user"
+                width={40}
+                height={40}
+                className="object-cover"
+              />
+            </div>
+            <h1 className="text-[#cdbdff] font-bold text-lg">
+              Sovereign Vault
+            </h1>
           </div>
 
-          <div className="bg-white rounded-full w-12 h-12 flex items-center justify-center">
-            <UserIcon className="" color="#5d00a8" />
-          </div>
-        </motion.div>
-        <div className="mt-10 flex-wrap items-center justify-center">
-          <div className="flex justify-center items-center mt-4">
-            <div className="relative">
-              <p className="text-white text-lg absolute top-0 left-[-4vw]">$</p>
-              <motion.p
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                className="text-5xl text-white"
-              >
-                {valorAtual.toFixed(2)}
-              </motion.p>
-            </div>
-          </div>
-        </div>
-      </div>
-      {/* termino header */}
-
-      {/* Começo body */}
-      <div className="h-[70vh] bg-white w-screen relative">
-        <div className="flex justify-center w-full h-[6.5vh]">
-          <div className="w-[90vw] h-[10vh] bg-white absolute top-[-4vh] rounded-tr-2xl rounded-tl-2xl flex justify-around items-center">
-            <div className="flex flex-col items-center">
-              {/* top up account */}
-              <div className="flex flex-col items-center">
-                <Dialog>
-                  {/* O ícone vai virar o botão de abrir */}
-                  <DialogTrigger asChild>
-                    <div className="flex flex-col items-center cursor-pointer">
-                      <Topupicon />
-                      <p>Top up</p>
-                    </div>
-                  </DialogTrigger>
-
-                  {/* Conteúdo do modal */}
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>Top Up your ballance</DialogTitle>
-                      <DialogDescription>
-                        Add funds to your wallet
-                      </DialogDescription>
-                    </DialogHeader>
-
-                    <div className="py-4 flex items-center text-4xl font-semibold text-gray-800">
-                      <span className="mr-1">$</span>
-                      <input
-                        type="text"
-                        value={formatCurrency(value)}
-                        onChange={handleChange}
-                        onKeyDown={handleKeyDown}
-                        className="outline-none bg-transparent w-full"
-                      />
-                    </div>
-
-                    <div className="flex gap-2 flex-wrap justify-between">
-                      {suggestions.map((item) => (
-                        <button
-                          key={item}
-                          onClick={() => handleSelect(item)}
-                          className={`px-5 py-2 rounded-lg text-sm font-medium transition border-gray-300 border-solid border-[1px]
-              ${
-                value === item.toString()
-                  ? "bg-lime-400 text-black"
-                  : "bg-gray-100 text-gray-500 hover:bg-gray-200"
-              }`}
-                        >
-                          ${item}
-                        </button>
-                      ))}
-                    </div>
-
-                    <DialogFooter>
-                      <DialogClose asChild>
-                        <Button variant="destructive">Cancel</Button>
-                      </DialogClose>
-                    </DialogFooter>
-                  </DialogContent>
-                </Dialog>
-                {/* fim modal */}
-              </div>
-            </div>
-
-            {/* Send money             */}
-            <div className="flex flex-col items-center">
-              <Sendmoneyicon />
-              <p>Send</p>
-            </div>
-            {/* Request money */}
-            <div className="flex flex-col items-center">
-              <Recievemoneyicon />
-              <p>Request</p>
-            </div>
-            {/* Withdraw */}
-            <div className="flex flex-col items-center">
-              <Landmark className="stroke-[#5d00a8] stroke-1 w-[30px] h-[30px]" />
-              <p>Withdraw</p>
-            </div>
-          </div>
-        </div>
-        {/* 
-
-          Latest Transactions
-          
-          */}
-        <div className="p-4">
-          <div className="flex justify-center items-center">
-            <div className="w-full flex justify-between">
-              <p className="text-[14px] font-bold">Latest Transactions</p>
-              <p className="text-[12px] text-gray-400">View all</p>
-            </div>
-          </div>
-          {transacoes.length > 0 ? (
-            transacoes.map((t) => (
-              <div
-                key={t.id}
-                className="flex justify-between items-center bg-gray-100 p-3 rounded-xl"
-              >
-                <div className="flex items-center gap-3">
-                  <div className="bg-[#E6DDFF] p-2 rounded-sm shadow">
-                    {t.icon}
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold">{t.titulo}</p>
-                    <p className="text-xs text-gray-400">{t.data}</p>
-                  </div>
-                </div>
-                <p
-                  className={`text-xs tracking-wide font-bold ${
-                    t.valor.startsWith("-") ? "text-red-500" : "text-[#289B4F]"
+          <div className="flex items-center gap-4">
+            <nav className="hidden md:flex bg-[#181c22] p-1 rounded-full">
+              {["Início", "Extrato", "Cartões", "Investir"].map((item, i) => (
+                <button
+                  key={item}
+                  className={`px-4 py-2 text-xs rounded-full transition-all ${
+                    i === 0
+                      ? "bg-[#cdbdff] text-[#370096]"
+                      : "text-[#c9c4d5] hover:bg-[#1c2026]"
                   }`}
                 >
-                  {t.valor}
-                </p>
-              </div>
-            ))
-          ) : (
-            <p className="text-gray-400 text-sm text-center mt-2">
-              Carregando transações...
-            </p>
-          )}
-        </div>
-        {/* 
-            
-            Promo & Discounts
-            
-            */}
-        <div>
-          <div className="w-full p-4">
-            {/* Cabeçalho */}
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-semibold text-gray-900">
-                Promo & Discount
-              </h2>
-              <span className="text-purple-600 text-sm cursor-pointer">
-                See more
-              </span>
-            </div>
+                  {item}
+                </button>
+              ))}
+            </nav>
 
-            {/* Card de Promo */}
-            <div className="w-full h-40 rounded-3xl bg-gradient-to-r from-purple-900 to-purple-700 p-4 relative overflow-hidden">
-              <h3 className="text-white text-xl font-bold mb-2">
-                Special Offer
-                <br />
-                For Today’s Top Up
-              </h3>
-              <p className="text-purple-200 text-sm">
-                Get discount for every top up, transfer and payment
-              </p>
-
-              {/* Elementos decorativos */}
-              <div className="absolute top-0 right-0 w-8 h-8 bg-purple-500 rounded-full opacity-50"></div>
-              <div className="absolute bottom-4 left-4 w-12 h-3 bg-purple-400 rounded-full opacity-50"></div>
-            </div>
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              className="p-2 rounded-full hover:bg-[#1c2026]"
+            >
+              <Icon name="notifications" />
+            </motion.button>
           </div>
         </div>
+      </header>
 
-        {/* fim do body branco */}
-      </div>
+      {/* MAIN */}
+      <main className="pt-24 pb-32 px-6 max-w-7xl mx-auto space-y-8">
+        {/* SALDO */}
+        <section>
+          <p className="text-xs uppercase tracking-widest text-[#c9c4d5]">
+            Saldo Disponível
+          </p>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-5xl font-extrabold"
+          >
+            R$ 298,87
+          </motion.h2>
+
+          <div className="flex gap-2 mt-2 text-sm">
+            <span className="text-[#00daf3]">Rendimento:</span>
+            <span className="text-[#00daf3] font-bold">+R$ 12,40</span>
+          </div>
+        </section>
+
+        {/* CARDS */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            className="bg-[#181c22] p-6 rounded-xl border border-[#474553]/20"
+          >
+            <div className="flex justify-between">
+              <p className="text-xs text-[#c9c4d5] uppercase">
+                Patrimônio Total
+              </p>
+              <Icon name="account_balance" className="text-[#cdbdff]" />
+            </div>
+            <p className="text-2xl font-bold text-[#cdbdff] mt-4">
+              R$ 12.450,00
+            </p>
+          </motion.div>
+
+          <motion.div
+            whileHover={{ scale: 1.02 }}
+            className="bg-[#3b00a1] p-6 rounded-xl relative overflow-hidden"
+          >
+            <div className="flex justify-between">
+              <p className="text-xs text-[#a68bff] uppercase">Fatura</p>
+              <Icon name="credit_card" className="text-[#a68bff]" />
+            </div>
+
+            <p className="text-xl font-bold mt-4">Vence em 24 Out</p>
+            <p className="text-[#a68bff]">R$ 1.540,20</p>
+
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className="mt-4 bg-white/20 px-4 py-2 rounded-full text-xs"
+            >
+              Pagar fatura
+            </motion.button>
+          </motion.div>
+        </section>
+
+        {/* AÇÕES */}
+        <section>
+          <h3 className="text-xs uppercase text-[#c9c4d5] mb-4">
+            Transações rápidas
+          </h3>
+
+          <div className="grid grid-cols-4 gap-4">
+            {[
+              { name: "Pix", icon: "qr_code_2" },
+              { name: "Transferir", icon: "send" },
+              { name: "Boletos", icon: "receipt_long" },
+              { name: "Investir", icon: "savings" },
+            ].map((item) => (
+              <motion.button
+                key={item.name}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.9 }}
+                className="flex flex-col items-center gap-2"
+              >
+                <div className="w-14 h-14 flex items-center justify-center rounded-full bg-[#181c22] border border-[#474553]/20 hover:bg-[#cdbdff] hover:text-[#370096] transition">
+                  <Icon name={item.icon} />
+                </div>
+                <span className="text-[10px] text-[#c9c4d5] uppercase">
+                  {item.name}
+                </span>
+              </motion.button>
+            ))}
+          </div>
+        </section>
+
+        {/* BANNER */}
+        <motion.section
+          whileHover={{ scale: 1.01 }}
+          className="relative h-56 rounded-xl overflow-hidden"
+        >
+          <Image
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAlqNnBpsWavij_o2_vHmDC9x9hm3GwBEMJ2HSsCOmRX9acGxxC6XJ_Pr-mWg-ZYKdLDunJ1DZulo2T3Z51N5CBph5zQuWtGODGkDolQ-SjkJGD-NcQYDunYlyEKbXVOf7nwu2hyF2wuh3pLUY0U9u6sTPW0geujmPXeBrK4v_pkYdV5_ZA_02NhS6vjryVuNXDkaEFsv2x6MGroVYu7nKLooqrkjy1FuEDt44HE_WkPTTU2OEgV8oqcxnbRRiqSELC8priKsF1x6Sn"
+            alt="banner"
+            fill
+            className="object-cover"
+          />
+
+          <div className="absolute inset-0 bg-gradient-to-r from-[#101419] via-[#101419]/70 to-transparent" />
+
+          <div className="relative h-full flex flex-col justify-center px-6 max-w-sm">
+            <span className="bg-[#00daf3] text-[#00363d] text-[10px] px-2 py-1 rounded-full mb-3 uppercase">
+              Oportunidade
+            </span>
+            <h2 className="text-xl font-bold">Renda Fixa Premium</h2>
+            <p className="text-sm text-[#e0e2eb]/70 mb-4">
+              110% do CDI para clientes premium.
+            </p>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              className="bg-[#cdbdff] text-[#370096] px-4 py-2 rounded-full text-sm"
+            >
+              Saiba mais
+            </motion.button>
+          </div>
+        </motion.section>
+
+        {/* TRANSAÇÕES */}
+        <section>
+          <div className="flex justify-between mb-4">
+            <h3 className="text-xs text-[#c9c4d5] uppercase">
+              Últimos lançamentos
+            </h3>
+            <span className="text-xs text-[#00daf3] cursor-pointer">
+              Ver tudo
+            </span>
+          </div>
+
+          <div className="space-y-2">
+            {[
+              {
+                name: "Netflix",
+                icon: "subscriptions",
+                value: "-R$ 55,90",
+              },
+              {
+                name: "Pix recebido",
+                icon: "payments",
+                value: "+R$ 1200,00",
+              },
+              {
+                name: "Mercado Livre",
+                icon: "shopping_cart",
+                value: "-R$ 242,30",
+              },
+            ].map((t, i) => (
+              <motion.div
+                key={i}
+                whileHover={{ scale: 1.01 }}
+                className="flex justify-between items-center p-4 bg-[#181c22] rounded-lg border border-[#474553]/10"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 flex items-center justify-center rounded-full bg-[#262a31]">
+                    <Icon name={t.icon} />
+                  </div>
+                  <span>{t.name}</span>
+                </div>
+                <span
+                  className={
+                    t.value.includes("+") ? "text-[#00daf3]" : "text-white"
+                  }
+                >
+                  {t.value}
+                </span>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+      </main>
+
+      {/* NAV */}
+      <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 md:hidden">
+        <div className="flex items-center gap-10 px-8 py-3 rounded-full bg-[#181c22]/90 backdrop-blur-xl border border-[#474553]/20 shadow-lg">
+          {[
+            { name: "Início", icon: "home" },
+            { name: "Extrato", icon: "query_stats" },
+            { name: "Cartão", icon: "credit_card" },
+            { name: "Menu", icon: "grid_view" },
+          ].map((item, i) => (
+            <motion.div
+              key={item.name}
+              whileTap={{ scale: 0.9 }}
+              className="flex flex-col items-center text-[10px]"
+            >
+              <div
+                className={`w-10 h-10 flex items-center justify-center rounded-full transition ${
+                  i === 0 ? "bg-[#cdbdff]/20 text-[#cdbdff]" : "text-[#c9c4d5]"
+                }`}
+              >
+                <Icon
+                  name={item.icon}
+                  className={`${i === 0 ? "nav-active" : ""} text-[22px]`}
+                />
+              </div>
+
+              <span
+                className={`mt-1 uppercase tracking-widest ${
+                  i === 0 ? "text-[#cdbdff]" : "text-[#c9c4d5]"
+                }`}
+              >
+                {item.name}
+              </span>
+            </motion.div>
+          ))}
+        </div>
+      </nav>
     </div>
   );
 }
