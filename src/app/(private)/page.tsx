@@ -2,6 +2,10 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+
+
 
 const Icon = ({
   name,
@@ -12,6 +16,7 @@ const Icon = ({
 }) => <span className={`material-symbols-outlined ${className}`}>{name}</span>;
 
 export default function HomePage() {
+  const pathname = usePathname();
   return (
     <div className="min-h-screen bg-[#101419] text-[#e0e2eb]">
       {/* HEADER */}
@@ -37,11 +42,10 @@ export default function HomePage() {
               {["Início", "Extrato", "Cartões", "Investir"].map((item, i) => (
                 <button
                   key={item}
-                  className={`px-4 py-2 text-xs rounded-full transition-all ${
-                    i === 0
-                      ? "bg-[#cdbdff] text-[#370096]"
-                      : "text-[#c9c4d5] hover:bg-[#1c2026]"
-                  }`}
+                  className={`px-4 py-2 text-xs rounded-full transition-all ${i === 0
+                    ? "bg-[#cdbdff] text-[#370096]"
+                    : "text-[#c9c4d5] hover:bg-[#1c2026]"
+                    }`}
                 >
                   {item}
                 </button>
@@ -237,35 +241,39 @@ export default function HomePage() {
       <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 md:hidden">
         <div className="flex items-center gap-10 px-8 py-3 rounded-full bg-[#181c22]/90 backdrop-blur-xl border border-[#474553]/20 shadow-lg">
           {[
-            { name: "Início", icon: "home" },
-            { name: "Extrato", icon: "query_stats" },
-            { name: "Cartão", icon: "credit_card" },
-            { name: "Menu", icon: "grid_view" },
-          ].map((item, i) => (
-            <motion.div
-              key={item.name}
-              whileTap={{ scale: 0.9 }}
-              className="flex flex-col items-center text-[10px]"
-            >
-              <div
-                className={`w-10 h-10 flex items-center justify-center rounded-full transition ${
-                  i === 0 ? "bg-[#cdbdff]/20 text-[#cdbdff]" : "text-[#c9c4d5]"
-                }`}
+            { name: "Início", icon: "home", href: "/" },
+            { name: "Extrato", icon: "query_stats", href: "/extrato" },
+            { name: "Cartão", icon: "credit_card", href: "/cards" },
+            { name: "Menu", icon: "grid_view", href: "/menu" },
+          ].map((item) => (
+            <Link key={item.name} href={item.href}>
+              <motion.div
+                whileTap={{ scale: 0.9 }}
+                className="flex flex-col items-center text-[10px]"
               >
-                <Icon
-                  name={item.icon}
-                  className={`${i === 0 ? "nav-active" : ""} text-[22px]`}
-                />
-              </div>
+                <div
+                  className={`w-10 h-10 flex items-center justify-center rounded-full transition ${pathname === item.href
+                    ? "bg-[#cdbdff]/20 text-[#cdbdff]"
+                    : "text-[#c9c4d5]"
+                    }`}
+                >
+                  <Icon
+                    name={item.icon}
+                    className={`${pathname === item.href ? "nav-active" : ""
+                      } text-[22px]`}
+                  />
+                </div>
 
-              <span
-                className={`mt-1 uppercase tracking-widest ${
-                  i === 0 ? "text-[#cdbdff]" : "text-[#c9c4d5]"
-                }`}
-              >
-                {item.name}
-              </span>
-            </motion.div>
+                <span
+                  className={`mt-1 uppercase tracking-widest ${pathname === item.href
+                    ? "text-[#cdbdff]"
+                    : "text-[#c9c4d5]"
+                    }`}
+                >
+                  {item.name}
+                </span>
+              </motion.div>
+            </Link>
           ))}
         </div>
       </nav>
