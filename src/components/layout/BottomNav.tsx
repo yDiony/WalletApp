@@ -1,0 +1,60 @@
+"use client";
+
+import Link from "next/link";
+import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+import Icon from "../ui/Icon";
+
+export default function BottomNav() {
+  const pathname = usePathname();
+
+  const items = [
+    { name: "Início", icon: "home", href: "/" },
+    { name: "Extrato", icon: "query_stats", href: "/extrato" },
+    { name: "Cartão", icon: "credit_card", href: "/cards" },
+    { name: "Menu", icon: "grid_view", href: "/menu" },
+  ];
+
+  return (
+    <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 md:hidden">
+      <div className="flex items-center gap-10 px-8 py-3 rounded-full bg-[#181c22]/90 backdrop-blur-xl border border-[#474553]/20 shadow-lg">
+        
+        {items.map((item) => {
+          const active = pathname === item.href;
+
+          return (
+            <Link key={item.name} href={item.href}>
+              <motion.div
+                whileTap={{ scale: 0.9 }}
+                className="flex flex-col items-center text-[10px]"
+              >
+                <div
+                  className={`w-10 h-10 flex items-center justify-center rounded-full transition ${
+                    active
+                      ? "bg-[#cdbdff]/20 text-[#cdbdff]"
+                      : "text-[#c9c4d5]"
+                  }`}
+                >
+                  <Icon
+                    name={item.icon}
+                    className={`${active ? "nav-active" : ""} text-[22px]`}
+                  />
+                </div>
+
+                <span
+                  className={`mt-1 uppercase tracking-widest ${
+                    active
+                      ? "text-[#cdbdff]"
+                      : "text-[#c9c4d5]"
+                  }`}
+                >
+                  {item.name}
+                </span>
+              </motion.div>
+            </Link>
+          );
+        })}
+      </div>
+    </nav>
+  );
+}
