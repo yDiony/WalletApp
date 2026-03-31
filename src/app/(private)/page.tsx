@@ -260,7 +260,7 @@ export default function HomePage() {
                   <Icon
                     name={item.icon}
                     className={`${pathname === item.href ? "nav-active" : ""
-                      } text-[22px]`}
+                      } text-[22.5px]`}
                   />
                 </div>
 
