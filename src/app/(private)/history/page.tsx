@@ -1,24 +1,164 @@
-import { ChevronDown } from "lucide-react";
+"use client";
 
-export default function History() {
+import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+
+const Icon = ({ name, className = "" }: any) => (
+  <span className={`material-symbols-outlined ${className}`}>
+    {name}
+  </span>
+);
+
+export default function ExtratoPage() {
+  const pathname = usePathname();
+
   return (
-    <div className="">
-      <div className="w-full h-20 flex justify-center items-center">
-        <h1 className="font-bold text-[20px]">Statistic</h1>
-      </div>
-      <div className="p-4">
-        <p className="text-gray-400 text-sm">Total moved this year</p>
-        <p className="text-3xl font-bold mt-1">$9,305.02</p>
-      </div>
-      <div className="p-5">
-        <div className="flex justify-between">
-          <h2 className="text-[14px] font-bold">Overview</h2>
-          <div className="flex">
-          <p className="text-[14px] font-bold mr-2">Month </p>
-          <ChevronDown/>
+    <div className="min-h-screen bg-[#101419] text-[#e0e2eb] pb-32">
+      
+      {/* HEADER SIMPLIFICADO */}
+      <header className="fixed top-0 w-full z-50 backdrop-blur-md bg-[#101419]/80 border-b border-[#474553]/20">
+        <div className="flex items-center justify-between px-6 py-4">
+          
+          <div className="flex items-center gap-3">
+            <Link href="/">
+              <motion.div whileTap={{ scale: 0.9 }}>
+                <Icon name="arrow_back" className="text-[#c9c4d5]" />
+              </motion.div>
+            </Link>
+
+            <div>
+              <h1 className="text-lg font-bold">Atividade</h1>
+              <p className="text-xs text-[#c9c4d5] uppercase tracking-widest">
+                Outubro
+              </p>
+            </div>
           </div>
+
+          <Icon name="search" className="text-[#c9c4d5]" />
         </div>
-      </div>
+      </header>
+
+      {/* CONTEÚDO */}
+      <main className="pt-24 px-6 space-y-8">
+
+        {/* RESUMO */}
+        <section className="bg-[#181c22] p-6 rounded-xl border border-[#474553]/20 flex justify-between">
+          
+          <div>
+            <p className="text-[10px] uppercase text-[#c9c4d5]">
+              Entradas
+            </p>
+            <p className="text-[#00daf3] font-bold text-xl">
+              +R$ 12.450
+            </p>
+          </div>
+
+          <div className="w-px bg-[#474553]/30" />
+
+          <div className="text-right">
+            <p className="text-[10px] uppercase text-[#c9c4d5]">
+              Saídas
+            </p>
+            <p className="font-bold text-xl">
+              -R$ 8.124
+            </p>
+          </div>
+        </section>
+
+        {/* BUSCA */}
+        <div className="relative">
+          <Icon className="absolute left-4 top-1/2 -translate-y-1/2 text-[#c9c4d5]" name="search" />
+          <input
+            placeholder="Buscar transações..."
+            className="w-full bg-[#181c22] rounded-xl py-4 pl-12 pr-4 outline-none border border-[#474553]/20 focus:border-[#cdbdff]"
+          />
+        </div>
+
+        {/* LISTA */}
+        <section className="space-y-6">
+
+          {/* HOJE */}
+          <div>
+            <h3 className="text-sm text-[#c9c4d5] mb-3">Hoje</h3>
+
+            <div className="space-y-3">
+              {[
+                {
+                  name: "Restaurante",
+                  icon: "restaurant",
+                  value: "-R$ 124,50",
+                },
+                {
+                  name: "Salário",
+                  icon: "payments",
+                  value: "+R$ 8.400,00",
+                },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  whileHover={{ scale: 1.02 }}
+                  className="flex justify-between items-center p-4 bg-[#181c22] rounded-xl border border-[#474553]/10"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#262a31]">
+                      <Icon name={item.icon} />
+                    </div>
+                    <span>{item.name}</span>
+                  </div>
+
+                  <span
+                    className={
+                      item.value.includes("+")
+                        ? "text-[#00daf3]"
+                        : "text-white"
+                    }
+                  >
+                    {item.value}
+                  </span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* ONTEM */}
+          <div>
+            <h3 className="text-sm text-[#c9c4d5] mb-3">Ontem</h3>
+
+            <div className="space-y-3">
+              {[
+                {
+                  name: "Uber",
+                  icon: "local_taxi",
+                  value: "-R$ 42,20",
+                },
+                {
+                  name: "Apple Store",
+                  icon: "shopping_bag",
+                  value: "-R$ 2.199,00",
+                },
+              ].map((item, i) => (
+                <motion.div
+                  key={i}
+                  whileHover={{ scale: 1.02 }}
+                  className="flex justify-between items-center p-4 bg-[#181c22] rounded-xl border border-[#474553]/10"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 flex items-center justify-center rounded-full bg-[#262a31]">
+                      <Icon name={item.icon} />
+                    </div>
+                    <span>{item.name}</span>
+                  </div>
+
+                  <span>{item.value}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* NAV (reaproveita a tua) */}
     </div>
   );
 }
