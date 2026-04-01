@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
+import { user } from "@/lib/data/mock";
+import { formatCurrency } from "@/lib/utils/format";
 
 
 
@@ -75,7 +76,7 @@ export default function HomePage() {
             animate={{ opacity: 1, y: 0 }}
             className="text-5xl font-extrabold"
           >
-            R$ 298,87
+            {formatCurrency(user.balance)}
           </motion.h2>
 
           <div className="flex gap-2 mt-2 text-sm">
@@ -97,7 +98,7 @@ export default function HomePage() {
               <Icon name="account_balance" className="text-[#cdbdff]" />
             </div>
             <p className="text-2xl font-bold text-[#cdbdff] mt-4">
-              R$ 12.450,00
+              {formatCurrency(user.balance)}
             </p>
           </motion.div>
 
@@ -237,7 +238,7 @@ export default function HomePage() {
         </section>
       </main>
 
-     
+
     </div>
   );
 }

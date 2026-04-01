@@ -5,15 +5,18 @@ export default function TransactionItem({
   name,
   icon,
   value,
+  onClick,
 }: {
   name: string;
   icon: string;
   value: string;
+  onClick?: () => void;
 }) {
   const isPositive = value.includes("+");
 
   return (
     <motion.div
+      onClick={onClick}
       whileHover={{ scale: 1.02 }}
       className="flex justify-between items-center p-4 bg-[#181c22] rounded-xl border border-[#474553]/10"
     >

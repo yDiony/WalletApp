@@ -4,7 +4,12 @@ import { motion } from "framer-motion";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import TransactionItem from "@/components/transactions/TransactionItem";
-import BottomNav from "@/components/layout/BottomNav";
+import { transactions } from "@/lib/data/mock";
+import { groupTransactions } from "@/lib/utils/groupTransactions";
+import { formatCurrency } from "@/lib/utils/format";
+import { useState } from "react";
+import TransactionModal from "@/components/transactions/TransactionModal";
+
 
 const Icon = ({ name, className = "" }: any) => (
   <span className={`material-symbols-outlined ${className}`}>
@@ -13,8 +18,10 @@ const Icon = ({ name, className = "" }: any) => (
 );
 
 export default function ExtratoPage() {
-  const pathname = usePathname();
 
+  const pathname = usePathname();
+  const grouped = groupTransactions(transactions) as Record<string, any[]>;
+  const [selectedTransaction, setSelectedTransaction] = useState<any>(null);
   return (
     <div className="min-h-screen bg-[#101419] text-[#e0e2eb] pb-32">
 
@@ -78,46 +85,33 @@ export default function ExtratoPage() {
         </div>
 
         {/* LISTA */}
-        <section className="space-y-6">
-
-          {/* HOJE */}
-          <div>
-            <h3 className="text-sm text-[#c9c4d5] mb-3">Hoje</h3>
+        {Object.entries(grouped).map(([date, items]) => (
+          <div key={date}>
+            <h3 className="text-sm text-[#c9c4d5] mb-3">{date}</h3>
 
             <div className="space-y-3">
-              <TransactionItem
-                name="Restaurante"
-                icon="restaurant"
-                value="-R$ 124,50"
-              />
-              <TransactionItem
-                name="Salário"
-                icon="payments"
-                value="+R$ 8.400,00"
-              />
+
+              {items.map((t: any) => (
+
+                <TransactionItem
+
+                  key={t.id}
+                  name={t.name}
+                  icon={t.icon}
+                  value={formatCurrency(t.amount)}
+                  onClick={() => setSelectedTransaction(t)}
+                />
+              ))}
             </div>
           </div>
-
-          {/* ONTEM */}
-          <div>
-            <h3 className="text-sm text-[#c9c4d5] mb-3">Ontem</h3>
-
-            <div className="space-y-3">
-              <TransactionItem
-                name="Restaurante"
-                icon="restaurant"
-                value="-R$ 84,49"
-              />
-              <TransactionItem
-                name="Pix"
-                icon="payments"
-                value="+R$ 400,00"
-              />
-            </div>
-          </div>
-        </section>
+        ))}
       </main>
-
+      
+      <TransactionModal
+        data={selectedTransaction}
+        onClose={() => setSelectedTransaction(null)}
+      />
     </div>
+
   );
 }
