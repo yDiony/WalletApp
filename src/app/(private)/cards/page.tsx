@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+
 import { motion } from "framer-motion";
 
 const Icon = ({ name, className = "" }: { name: string; className?: string }) => (
@@ -10,8 +10,7 @@ const Icon = ({ name, className = "" }: { name: string; className?: string }) =>
 export default function CardsPage() {
   return (
     <div className="min-h-screen bg-[#101419] text-[#e0e2eb] px-6 pt-12 pb-32 max-w-7xl mx-auto overflow-hidden">
-
-      {/* HEADER */}
+    
       <motion.section
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
@@ -30,16 +29,16 @@ export default function CardsPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
 
-        {/* LEFT - CARDS AREA */}
+        
         <div className="lg:col-span-7 space-y-8">
 
-          {/* CARD FÍSICO COM BORDA ANIMADA E BACKGROUND MESH */}
+        
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="relative group"
           >
-            {/* ANIMAÇÃO DA BORDA (Glow que gira) */}
+           
             <div className="absolute -inset-[2px] rounded-2xl overflow-hidden">
               <motion.div
                 animate={{ rotate: 360 }}
@@ -50,7 +49,7 @@ export default function CardsPage() {
 
             <div className="relative aspect-[1.586/1] w-full rounded-xl bg-[#0b0e14] p-8 flex flex-col justify-between border border-white/5 shadow-2xl overflow-hidden">
 
-              {/* LUZ 1 - ROXA/VIOLETA (Mais intensa e rápida) */}
+             
               <motion.div
                 animate={{
                   scale: [1, 1.5, 1],
@@ -62,7 +61,7 @@ export default function CardsPage() {
                 className="absolute top-0 right-0 w-[70%] h-[70%] bg-[#3b00a1] blur-[60px] rounded-full mix-blend-screen"
               />
 
-              {/* LUZ 2 - CIANO/AZUL (Movimento oposto) */}
+             
               <motion.div
                 animate={{
                   scale: [1, 1.3, 1],
@@ -74,7 +73,6 @@ export default function CardsPage() {
                 className="absolute bottom-0 left-0 w-[60%] h-[60%] bg-[#00daf3]/40 blur-[50px] rounded-full mix-blend-screen"
               />
 
-              {/* REFLEXO DE SUPERFÍCIE (SHIMMER) - Aquele brilho que passa rápido */}
               <motion.div
                 animate={{ x: ['-100%', '200%'] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", repeatDelay: 1 }}
@@ -98,7 +96,6 @@ export default function CardsPage() {
 
               <div className="relative z-10 space-y-6">
                 <div className="flex gap-4 items-center">
-                  {/* CHIP COM BRILHO PRÓPRIO */}
                   <div className="relative w-12 h-9 bg-gradient-to-br from-[#cdbdff] to-[#7b5cff] rounded-md shadow-[0_0_15px_rgba(205,189,255,0.3)]">
                     <div className="absolute inset-0 bg-black/10 rounded-md border border-white/20" />
                   </div>
@@ -121,7 +118,6 @@ export default function CardsPage() {
             </div>
           </motion.div>
 
-          {/* CARD VIRTUAL COM EFEITO DE VIDRO E PULSO */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -163,14 +159,13 @@ export default function CardsPage() {
 
         </div>
 
-        {/* RIGHT - CONTROLS & LIMITS */}
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3 }}
           className="lg:col-span-5 space-y-6"
         >
-          {/* CONTROLES */}
+
           <div className="bg-[#181c22] rounded-2xl p-6 border border-white/5 space-y-4">
             <h3 className="text-lg font-bold mb-2">Quick Controls</h3>
             {[
@@ -194,7 +189,6 @@ export default function CardsPage() {
             ))}
           </div>
 
-          {/* LIMITES COM BARRAS ANIMADAS */}
           <div className="bg-[#181c22] rounded-2xl p-6 border border-white/5 space-y-6">
             <h3 className="text-lg font-bold">Spending Limits</h3>
             {[
@@ -218,7 +212,6 @@ export default function CardsPage() {
             ))}
           </div>
 
-          {/* BANNER INTERATIVO */}
           <motion.div
             whileHover={{ y: -5 }}
             className="bg-gradient-to-br from-[#3b00a1] to-[#1c2026] rounded-2xl p-8 relative overflow-hidden border border-[#cdbdff]/20 group cursor-pointer"

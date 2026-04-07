@@ -20,7 +20,6 @@ export default function HomePage() {
   const pathname = usePathname();
   return (
     <div className="min-h-screen bg-[#101419] text-[#e0e2eb]">
-      {/* HEADER */}
       <header className="fixed top-0 w-full z-50 backdrop-blur-md bg-[#101419]/80 border-b border-[#474553]/20">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -63,9 +62,7 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* MAIN */}
       <main className="pt-24 pb-32 px-6 max-w-7xl mx-auto space-y-8">
-        {/* SALDO */}
         <section>
           <p className="text-xs uppercase tracking-widest text-[#c9c4d5]">
             Saldo Disponível
@@ -85,7 +82,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* CARDS */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <motion.div
             whileHover={{ scale: 1.02 }}
@@ -124,7 +120,6 @@ export default function HomePage() {
           </motion.div>
         </section>
 
-        {/* AÇÕES */}
         <section>
           <h3 className="text-xs uppercase text-[#c9c4d5] mb-4">
             Transações rápidas
@@ -154,7 +149,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* BANNER */}
         <motion.section
           whileHover={{ scale: 1.01 }}
           className="relative h-56 rounded-xl overflow-hidden"
@@ -185,7 +179,6 @@ export default function HomePage() {
           </div>
         </motion.section>
 
-        {/* TRANSAÇÕES */}
         <section>
           <div className="flex justify-between mb-4">
             <h3 className="text-xs text-[#c9c4d5] uppercase">
