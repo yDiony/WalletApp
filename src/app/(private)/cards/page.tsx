@@ -17,13 +17,13 @@ export default function CardsPage() {
         className="mb-12"
       >
         <span className="text-xs uppercase tracking-[0.3em] text-[#00daf3] mb-2 block">
-          Management
+          Cartões
         </span>
         <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
-          My Cards
+          Meus cartões
         </h2>
         <p className="text-[#c9c4d5] max-w-md">
-          Control your physical and virtual assets with precision.
+          Controle seus cartões físicos e virtuais, defina limites de gastos e acesse benefícios exclusivos.
         </p>
       </motion.section>
 
@@ -106,11 +106,11 @@ export default function CardsPage() {
 
                 <div className="flex justify-between text-sm">
                   <div>
-                    <p className="text-[10px] uppercase tracking-widest text-[#c9c4d5] mb-1">Card Holder</p>
+                    <p className="text-[10px] uppercase tracking-widest text-[#c9c4d5] mb-1">Dono</p>
                     <p className="font-medium tracking-tight text-white">ALEXANDER VANCE</p>
                   </div>
                   <div className="text-right">
-                    <p className="text-[10px] uppercase tracking-widest text-[#c9c4d5] mb-1">Expires</p>
+                    <p className="text-[10px] uppercase tracking-widest text-[#c9c4d5] mb-1">Expira em:</p>
                     <p className="font-medium text-white">12/28</p>
                   </div>
                 </div>
@@ -167,11 +167,11 @@ export default function CardsPage() {
         >
 
           <div className="bg-[#181c22] rounded-2xl p-6 border border-white/5 space-y-4">
-            <h3 className="text-lg font-bold mb-2">Quick Controls</h3>
+            <h3 className="text-lg font-bold mb-2">Ações rápidas</h3>
             {[
-              { title: "Freeze Card", icon: "ac_unit", color: "text-red-400" },
-              { title: "Change PIN", icon: "password", color: "text-[#cdbdff]" },
-              { title: "Contactless", icon: "contactless", color: "text-[#00daf3]" },
+              { title: "Congelar Cartão", icon: "ac_unit", color: "text-red-400" },
+              { title: "Alterar PIN", icon: "password", color: "text-[#cdbdff]" },
+              { title: "NFC", icon: "contactless", color: "text-[#00daf3]" },
             ].map((item, idx) => (
               <motion.div
                 key={item.title}
@@ -190,15 +190,15 @@ export default function CardsPage() {
           </div>
 
           <div className="bg-[#181c22] rounded-2xl p-6 border border-white/5 space-y-6">
-            <h3 className="text-lg font-bold">Spending Limits</h3>
+            <h3 className="text-lg font-bold">Limites</h3>
             {[
-              { label: "Daily Limit", current: 2450, total: 5000, color: "bg-[#cdbdff]", percent: "w-1/2" },
-              { label: "Monthly Limit", current: 800, total: 2500, color: "bg-[#00daf3]", percent: "w-1/3" },
+              { label: "Limite Diário", current: 2450, total: 5000, color: "bg-[#cdbdff]", percent: "w-1/2" },
+              { label: "Limite Mensal", current: 800, total: 2500, color: "bg-[#00daf3]", percent: "w-1/3" },
             ].map((limit) => (
               <div key={limit.label}>
                 <div className="flex justify-between text-sm mb-3">
                   <span className="text-[#c9c4d5]">{limit.label}</span>
-                  <span className="font-mono">${limit.current.toLocaleString()} / ${limit.total.toLocaleString()}</span>
+                  <span className="font-mono">R${limit.current.toLocaleString()} / R${limit.total.toLocaleString()}</span>
                 </div>
                 <div className="h-2.5 bg-[#31353c] rounded-full overflow-hidden">
                   <motion.div
@@ -218,10 +218,10 @@ export default function CardsPage() {
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 rounded-full -mr-16 -mt-16 blur-3xl group-hover:bg-[#00daf3]/10 transition-colors" />
             <h4 className="text-xl font-bold text-[#cdbdff] mb-2 relative z-10">
-              Priority Concierge
+              Lounge Access
             </h4>
             <p className="text-sm text-[#c9c4d5] max-w-[200px] relative z-10 leading-relaxed">
-              Unlock global airport lounge access and exclusive benefits.
+              Acesso gratuito a mais de 1.000 lounges VIP em aeroportos ao redor do mundo.
             </p>
             <Icon
               name="diamond"

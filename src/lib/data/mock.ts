@@ -18,7 +18,7 @@ export const cards = [
 export const transactions = [
   {
     id: "t1",
-    name: "Alchemist Bar",
+    name: "Bar da esquina",
     icon: "restaurant",
     amount: -124.5,
     date: "2026-10-24T19:42:00",
@@ -26,7 +26,7 @@ export const transactions = [
   },
   {
     id: "t2",
-    name: "Salary Deposit",
+    name: "Transferência recebida",
     icon: "payments",
     amount: 800,
     date: "2026-10-24T09:15:00",

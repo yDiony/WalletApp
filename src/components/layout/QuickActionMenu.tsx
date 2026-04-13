@@ -15,9 +15,9 @@ export default function QuickActionMenu() {
   }, [pathname]);
 
   const actions = [
-    { title: "Cards", icon: "credit_card", color: "text-[#cdbdff]", href: "/cards" },
-    { title: "Freeze Card", icon: "ac_unit", color: "text-red-400" },
-    { title: "Spending Limits", icon: "tune", color: "text-[#00daf3]" },
+    { title: "Cartões", icon: "credit_card", color: "text-[#cdbdff]", href: "/cards" },
+    { title: "Congelar cartão", icon: "ac_unit", color: "text-red-400" },
+    { title: "Limites de Gastos", icon: "tune", color: "text-[#00daf3]" },
   ];
 
   return (
