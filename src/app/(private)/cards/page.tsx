@@ -119,43 +119,66 @@ export default function CardsPage() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            whileHover={{ scale: 1.01 }}
-            className="relative rounded-xl bg-white/[0.03] backdrop-blur-2xl border border-white/10 p-8 flex flex-col justify-between group overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-to-tr from-[#00daf3]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.2 }}
+  whileHover={{ scale: 1.01 }}
+  className="relative rounded-xl bg-white/[0.03] backdrop-blur-2xl border border-white/10 p-8 flex flex-col justify-between group overflow-hidden"
+>
+  <div className="absolute inset-0 bg-gradient-to-tr from-[#00daf3]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-            <div className="flex justify-between">
-              <span className="text-2xl font-black italic text-[#00daf3] drop-shadow-[0_0_10px_rgba(0,218,243,0.3)]">
-                VIRTUAL
-              </span>
-              <motion.div
-                animate={{ y: [0, -5, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              >
-                <Icon name="bolt" className="text-3xl text-[#00daf3]" />
-              </motion.div>
-            </div>
+  <div className="flex justify-between items-start">
+    
+    {/* CONTÊINER RELATIVO PARA O EFEITO NO TEXTO "VIRTUAL" */}
+    <div className="relative p-[2px] overflow-hidden rounded-md group">
+      
+      {/* O FEIXE DE LUZ ANIMADO (BORDER BEAM) */}
+      <motion.div
+        animate={{
+          top: ["0%", "0%", "100%", "100%", "0%"],
+          left: ["0%", "100%", "100%", "0%", "0%"],
+          opacity: [0, 1, 1, 1, 0]
+        }}
+        transition={{
+          duration: 3, // Velocidade da luz
+          repeat: Infinity,
+          ease: "linear",
+        }}
+        className="absolute h-[60%] w-[40%] bg-[#00daf3] blur-[8px] rounded-full opacity-0 group-hover:opacity-80 transition-opacity"
+        style={{ transform: 'translate(-50%, -50%)' }}
+      />
 
-            <div className="mt-12">
-              <p className="text-2xl tracking-[0.25em] mb-6 font-mono text-white/80">
-                •••• •••• •••• 1092
-              </p>
+      {/* O TEXTO COM FUNDO SUTIL PARA CORTE DO BLUR */}
+      <span className="relative z-10 block px-3 py-1 rounded-sm bg-[#101419]/80 backdrop-blur-sm text-2xl font-black italic text-[#00daf3] drop-shadow-[0_0_10px_rgba(0,218,243,0.3)] tracking-tighter">
+        VIRTUAL
+      </span>
+    </div>
 
-              <div className="flex gap-12 text-sm">
-                <div>
-                  <p className="text-[10px] uppercase text-[#c9c4d5] mb-1">CVV</p>
-                  <p className="font-bold tracking-widest">***</p>
-                </div>
-                <div>
-                  <p className="text-[10px] uppercase text-[#c9c4d5] mb-1">Exp</p>
-                  <p className="font-bold">09/26</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+    <motion.div
+      animate={{ y: [0, -5, 0] }}
+      transition={{ duration: 2, repeat: Infinity }}
+    >
+      <Icon name="bolt" className="text-3xl text-[#00daf3]" />
+    </motion.div>
+  </div>
+
+  <div className="mt-12">
+    <p className="text-2xl tracking-[0.25em] mb-6 font-mono text-white/80">
+      •••• •••• •••• 1092
+    </p>
+
+    <div className="flex gap-12 text-sm">
+      <div>
+        <p className="text-[10px] uppercase text-[#c9c4d5] mb-1">CVV</p>
+        <p className="font-bold tracking-widest text-white">***</p>
+      </div>
+      <div>
+        <p className="text-[10px] uppercase text-[#c9c4d5] mb-1">Exp</p>
+        <p className="font-bold text-white">09/26</p>
+      </div>
+    </div>
+  </div>
+</motion.div>
 
         </div>
 
