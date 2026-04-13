@@ -18,13 +18,13 @@ A  mobile webapp created by me for  improving UI/X skills. (only for tests, not 
 Clone the project
 
 ```bash
-  git clone https://link-to-project
+  git clone [https://link-to-project](https://github.com/yDiony/WalletApp.git)
 ```
 
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd WalletApp
 ```
 
 Install dependencies
