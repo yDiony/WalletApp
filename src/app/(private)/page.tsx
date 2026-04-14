@@ -17,11 +17,10 @@ const Icon = ({
 }) => <span className={`material-symbols-outlined ${className}`}>{name}</span>;
 
 export default function HomePage() {
-  const pathname = usePathname();
   return (
     <div className="min-h-screen bg-[#101419] text-[#e0e2eb]">
-      <header className="fixed top-0 w-full z-50 backdrop-blur-md bg-[#101419]/80 border-b border-[#474553]/20">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <header className="fixed top-0 left-1/2 z-50 w-full max-w-[430px] -translate-x-1/2 backdrop-blur-md bg-[#101419]/80 border-b border-[#474553]/20">
+        <div className="px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full overflow-hidden border border-[#474553]/30">
               <Image
@@ -38,7 +37,7 @@ export default function HomePage() {
           </div>
 
           <div className="flex items-center gap-4">
-            <nav className="hidden md:flex bg-[#181c22] p-1 rounded-full">
+            <nav className="hidden bg-[#181c22] p-1 rounded-full">
               {["Início", "Extrato", "Cartões", "Investir"].map((item, i) => (
                 <button
                   key={item}
@@ -62,7 +61,7 @@ export default function HomePage() {
         </div>
       </header>
 
-      <main className="pt-24 pb-32 px-6 max-w-7xl mx-auto space-y-8">
+      <main className="pt-24 pb-32 px-6 space-y-8">
         <section>
           <p className="text-xs uppercase tracking-widest text-[#c9c4d5]">
             Saldo Disponível
@@ -82,7 +81,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <section className="grid grid-cols-1 gap-4">
           <motion.div
             whileHover={{ scale: 1.02 }}
             className="bg-[#181c22] p-6 rounded-xl border border-[#474553]/20"

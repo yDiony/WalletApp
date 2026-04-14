@@ -34,9 +34,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
-        {/* NAV */}
-        <BottomNav />
+        <div className="app-shell">
+          {children}
+          <BottomNav />
+        </div>
       </body>
     </html>
   );

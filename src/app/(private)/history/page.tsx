@@ -26,7 +26,7 @@ export default function ExtratoPage() {
     <div className="min-h-screen bg-[#101419] text-[#e0e2eb] pb-32">
 
       {/* HEADER SIMPLIFICADO */}
-      <header className="fixed top-0 w-full z-50 backdrop-blur-md bg-[#101419]/80 border-b border-[#474553]/20">
+      <header className="fixed top-0 left-1/2 z-50 w-full max-w-[430px] -translate-x-1/2 backdrop-blur-md bg-[#101419]/80 border-b border-[#474553]/20">
         <div className="flex items-center justify-between px-6 py-4">
 
           <div className="flex items-center gap-3">

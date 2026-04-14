@@ -9,7 +9,7 @@ const Icon = ({ name, className = "" }: { name: string; className?: string }) =>
 
 export default function CardsPage() {
   return (
-    <div className="min-h-screen bg-[#101419] text-[#e0e2eb] px-6 pt-12 pb-32 max-w-7xl mx-auto overflow-hidden">
+    <div className="min-h-screen bg-[#101419] text-[#e0e2eb] px-6 pt-12 pb-32 overflow-hidden">
     
       <motion.section
         initial={{ opacity: 0, x: -20 }}
@@ -19,7 +19,7 @@ export default function CardsPage() {
         <span className="text-xs uppercase tracking-[0.3em] text-[#00daf3] mb-2 block">
           Cartões
         </span>
-        <h2 className="text-4xl lg:text-5xl font-extrabold tracking-tight mb-4">
+        <h2 className="text-4xl font-extrabold tracking-tight mb-4">
           Meus cartões
         </h2>
         <p className="text-[#c9c4d5] max-w-md">
@@ -27,10 +27,10 @@ export default function CardsPage() {
         </p>
       </motion.section>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 gap-8">
 
         
-        <div className="lg:col-span-7 space-y-8">
+        <div className="space-y-8">
 
         
           <motion.div
@@ -99,7 +99,7 @@ export default function CardsPage() {
                   <div className="relative w-12 h-9 bg-gradient-to-br from-[#cdbdff] to-[#7b5cff] rounded-md shadow-[0_0_15px_rgba(205,189,255,0.3)]">
                     <div className="absolute inset-0 bg-black/10 rounded-md border border-white/20" />
                   </div>
-                  <div className="text-xl lg:text-2xl tracking-[0.2em] text-white font-mono drop-shadow-lg">
+                  <div className="text-xl tracking-[0.2em] text-white font-mono drop-shadow-lg">
                     •••• •••• •••• 8842
                   </div>
                 </div>
@@ -186,7 +186,7 @@ export default function CardsPage() {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3 }}
-          className="lg:col-span-5 space-y-6"
+          className="space-y-6"
         >
 
           <div className="bg-[#181c22] rounded-2xl p-6 border border-white/5 space-y-4">

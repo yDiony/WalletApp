@@ -17,8 +17,8 @@ export default function BottomNav() {
   ];
 
   return (
-    <nav className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 md:hidden">
-      <div className="flex items-center gap-10 px-8 py-3 rounded-full bg-[#181c22]/90 backdrop-blur-xl border border-[#474553]/20 shadow-lg">
+    <nav className="fixed bottom-4 left-1/2 z-50 w-[calc(100vw-2rem)] max-w-[398px] -translate-x-1/2">
+      <div className="flex items-center justify-center gap-10 rounded-full bg-[#181c22]/90 px-8 py-3 backdrop-blur-xl border border-[#474553]/20 shadow-lg">
         
         {/* Renderiza os primeiros dois itens: Início e Extrato */}
         {items.slice(0, 2).map((item) => {

@@ -14,6 +14,11 @@ html {
   font-family: 'rubikRegular', sans-serif;
 }
 
+html,
+body {
+  min-height: 100%;
+}
+
 .material-symbols-outlined {
   font-family: "Material Symbols Outlined";
   font-weight: normal;
@@ -148,7 +153,34 @@ html {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply text-foreground;
+    background:
+      linear-gradient(180deg, #c7cbd4 0%, #b7bcc7 100%);
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.app-shell {
+  width: min(100vw, 430px);
+  min-height: 100dvh;
+  position: relative;
+  background: #101419;
+  color: #e0e2eb;
+  overflow-x: hidden;
+  border-left: 1px solid rgba(71, 69, 83, 0.45);
+  border-right: 1px solid rgba(71, 69, 83, 0.45);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 22px 70px rgba(16, 20, 25, 0.28);
+}
+
+@media (max-width: 430px) {
+  .app-shell {
+    width: 100%;
+    border-left: 0;
+    border-right: 0;
+    box-shadow: none;
   }
 }
 
